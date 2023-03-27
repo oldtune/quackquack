@@ -1,5 +1,5 @@
+using Data;
 using Microsoft.AspNetCore.Mvc;
-using QuackQuack.Models;
 
 namespace QuackQuack.Controllers;
 
@@ -7,6 +7,11 @@ namespace QuackQuack.Controllers;
 [Route("[controller]")]
 public class BlogController : ControllerBase
 {
+    readonly IRepository<BlogPost> _repository;
+    BlogController(IRepository<BlogPost> repository)
+    {
+        _repository = repository;
+    }
     readonly ILogger<BlogController> _logger;
 
     public BlogController(ILogger<BlogController> logger)
@@ -17,24 +22,25 @@ public class BlogController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllBlogPosts()
     {
-        return Ok();
+        var result = await _repository.GetAll();
+        return Ok(result);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> AddBlogPost()
-    {
-        return Ok();
-    }
+    // [HttpPost]
+    // public async Task<IActionResult> AddBlogPost()
+    // {
+    //     return Ok();
+    // }
 
-    [HttpPut]
-    public async Task<IActionResult> UpdateBlogPost()
-    {
-        return Ok();
-    }
+    // [HttpPut]
+    // public async Task<IActionResult> UpdateBlogPost()
+    // {
+    //     return Ok();
+    // }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeleteBlogPost()
-    {
-        return Ok();
-    }
+    // [HttpDelete]
+    // public async Task<IActionResult> DeleteBlogPost()
+    // {
+    //     return Ok();
+    // }
 }
