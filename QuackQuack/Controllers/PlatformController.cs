@@ -1,38 +1,46 @@
 using Data;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using QuackQuack.Mappings;
 using QuackQuack.Models;
 
 namespace QuackQuack.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/platform")]
 public class PlatformController : ExtendedControllerBase
 {
     readonly IDateTimeProvider _dateTimeProvider;
     readonly ILogger<PlatformController> _logger;
-    readonly IRepository<Platform> _repo;
+    readonly IRepository<BlogPlatform> _repo;
+    readonly IMapping<PlatformPatch, BlogPlatform, string> _platformMapping;
+    readonly IMapping<BlogPlatform, PlatformResponse> _platformResponseMapping;
 
     public PlatformController(ILogger<PlatformController> logger,
-     IRepository<Platform> repo,
-     IDateTimeProvider dateTimeProvider)
+     IRepository<BlogPlatform> repo,
+     IDateTimeProvider dateTimeProvider,
+     IMapping<PlatformPatch, BlogPlatform, string> platformMapping,
+     IMapping<BlogPlatform, PlatformResponse> platformResponseMapping)
     {
         _logger = logger;
         _repo = repo;
         _dateTimeProvider = dateTimeProvider;
+        _platformMapping = platformMapping;
+        _platformResponseMapping = platformResponseMapping;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAllPlatform()
     {
         var result = _repo.GetAll();
+
         return Ok(result);
     }
 
     [HttpPost]
     public async Task<IActionResult> AddNewPlatform(PlatformPatch model)
     {
-        var platform = new Platform
+        var platform = new BlogPlatform
         {
             CreatedDateUtc = _dateTimeProvider.CurrentUtcTime,
             ModifiedDateUtc = _dateTimeProvider.CurrentUtcTime,
@@ -48,12 +56,24 @@ public class PlatformController : ExtendedControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdatePlatform(PlatformPatch model, string id)
     {
-        var platform = new Platform
+        var platform = _platformMapping.Map(model, id);
+        _repo.Update(platform);
+        var result = await _repo.SaveChanges();
+
+        return DelegateCouldBeFailed(result);
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeletePlatform(string platform)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletePlatform(string platformId)
     {
-        return Ok();
+        var platform = await _repo.FindById(platformId);
+
+        if (platform.HasValue)
+        {
+            _repo.Remove(platform.Value);
+            var result = await _repo.SaveChanges();
+            return DelegateCouldBeFailed(result);
+        }
+        return BadRequest();
     }
 }

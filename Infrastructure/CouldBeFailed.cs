@@ -1,7 +1,7 @@
 using System;
 
 namespace Infrastructure;
-public class CouldBeFailed
+public struct CouldBeFailed
 {
     public async static Task<CouldBeFailed> FromTask(Func<Task> func)
     {

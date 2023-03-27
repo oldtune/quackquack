@@ -1,5 +1,5 @@
 namespace Data;
-public class Project
+public class Company : IAuditable
 {
     public string Id { set; get; }
     public string Name { set; get; }
@@ -7,7 +7,7 @@ public class Project
     public string Domain { set; get; }
     public DateTime StartDate { set; get; }
     public DateTime? EndDate { set; get; }
-    public string DemoLink { set; get; }
-    public string? CompanyId { set; get; }
-    public Company Company { set; get; }
+    public ICollection<Project> Projects { set; get; } = new List<Project>();
+    public DateTime? ModifiedDateUtc { get; set; }
+    public DateTime CreatedDateUtc { get; set; }
 }

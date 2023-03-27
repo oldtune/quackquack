@@ -1,5 +1,5 @@
 namespace Data;
-public class Platform : IAuditable
+public class BlogPlatform : IAuditable
 {
     public string Id { set; get; }
     public string Name { set; get; }

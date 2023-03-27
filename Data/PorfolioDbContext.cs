@@ -10,6 +10,7 @@ public class PorfolioDbContext : DbContext
 
     public DbSet<Profile> Profiles { set; get; }
     public DbSet<BlogPost> BlogPosts { set; get; }
-    public DbSet<Platform> Platforms { set; get; }
+    public DbSet<BlogPlatform> Platforms { set; get; }
     public DbSet<Project> Projects { set; get; }
+    public DbSet<Company> Companies { set; get; }
 }

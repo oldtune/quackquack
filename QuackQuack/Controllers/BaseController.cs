@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace QuackQuack.Controllers;
 public abstract class ExtendedControllerBase : ControllerBase
 {
-    public IActionResult DelegateCouldBeFailed(CouldBeFailed couldBeFailedOperation)
+    [NonAction]
+    protected IActionResult DelegateCouldBeFailed(CouldBeFailed couldBeFailedOperation)
     {
         if (couldBeFailedOperation.Failed)
         {
