@@ -1,5 +1,5 @@
 namespace Data;
-public class Project
+public class Project : IEntity
 {
     public string Id { set; get; }
     public string Name { set; get; }
@@ -10,4 +10,6 @@ public class Project
     public string DemoLink { set; get; }
     public string? CompanyId { set; get; }
     public Company Company { set; get; }
+    public DateTime? ModifiedDateUtc { get; set; }
+    public DateTime CreatedDateUtc { get; set; }
 }

@@ -1,6 +1,6 @@
 namespace QuackQuack.Models;
 
-public class PlatformPatch
+public class BlogPlatformPatch
 {
     public string Name { set; get; }
 }

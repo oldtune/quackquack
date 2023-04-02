@@ -22,13 +22,16 @@ builder.Services.AddDbContextPool<PorfolioDbContext>(config =>
     });
 });
 
-builder.Services.AddSingleton<IMapping<BlogPlatform, PlatformResponse>, PlatformResponseMapping>();
-builder.Services.AddSingleton<IMapping<PlatformPatch, BlogPlatform>, PlatformPatchMapping>();
-builder.Services.AddSingleton<IMapping<PlatformPatch, BlogPlatform, string>, PlatFormMapping>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+// builder.Services.AddSingleton<IMapping<BlogPlatform, BlogPlatformResponse>, PlatformResponseMapping>();
+// builder.Services.AddSingleton<IMapping<BlogPlatformPatch, BlogPlatform>, PlatformPatchMapping>();
+// builder.Services.AddSingleton<IMapping<BlogPlatformPatch, BlogPlatform, string>, PlatFormMapping>();
 
 builder.Services.AddScoped<IRepository<BlogPlatform>, PlatformRepository>();
-
+builder.Services.AddScoped<IRepository<Profile>, ProfileRepository>();
 builder.Services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+builder.Services.AddScoped<IUuidProvider, UuidProvider>();
 
 var app = builder.Build();
 

@@ -1,10 +1,11 @@
 namespace QuackQuack.Mappings;
-public interface IMapping<T, TResult>
-{
-    TResult Map(T obj);
-}
+// public interface IMapping<T, TResult> where T : class, new() where TResult : class, new()
+// {
+//     TResult Map(T obj);
+//     IEnumerable<TResult> MapCollection(IEnumerable<T> collections);
+// }
 
-public interface IMapping<T, TResult, TId>
-{
-    public TResult Map(T obj, TId id);
-}
+// public interface IMapping<T, TResult, TId> where T : class, new() where TResult : class, new()
+// {
+//     TResult Map(T obj, TId id);
+// }

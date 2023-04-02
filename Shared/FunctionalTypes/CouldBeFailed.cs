@@ -1,6 +1,6 @@
 using System;
 
-namespace Infrastructure;
+namespace Shared.FunctionalTypes;
 public struct CouldBeFailed
 {
     public async static Task<CouldBeFailed> FromTask(Func<Task> func)

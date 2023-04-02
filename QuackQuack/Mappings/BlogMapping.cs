@@ -1,18 +1,36 @@
 // using Data;
+// using QuackQuack.Models;
 
 // namespace QuackQuack.Mappings;
-// public class BlogPatchMapping : IMapping<BlogPatch, BlogPost>
+// public class BlogPatchMapping : BaseMapping<BlogPostPatch, BlogPost>, IMapping<BlogPostPatch, BlogPost>
 // {
-//     public BlogPost Map(BlogPatch obj)
+//     public override BlogPost Map(BlogPostPatch obj)
 //     {
-//         throw new NotImplementedException();
+//         return new BlogPost
+//         {
+//             BlogPlatformId = obj.BlogPlatformId,
+//             Description = obj.Description,
+//             PostedDate = obj.PostedDate,
+//             ProfileId = obj.ProfileId,
+//             Title = obj.Title
+//         };
 //     }
 // }
 
-// public class BlogResponseMapping : IMapping<BlogPost, BlogResponse>
+// public class BlogResponseMapping : BaseMapping<BlogPost, BlogPostResponse>, IMapping<BlogPost, BlogPostResponse>
 // {
-//     public BlogResponse Map(BlogPost obj)
+//     public override BlogPostResponse Map(BlogPost obj)
 //     {
-//         throw new NotImplementedException();
+//         return new BlogPostResponse
+//         {
+//             BlogPlatformId = obj.BlogPlatformId,
+//             CreatedDateUtc = obj.CreatedDateUtc,
+//             Description = obj.Description,
+//             Id = obj.Id,
+//             ModifiedDateUtc = obj.ModifiedDateUtc,
+//             PostedDate = obj.PostedDate,
+//             ProfileId = obj.ProfileId,
+//             Title = obj.Title
+//         };
 //     }
 // }

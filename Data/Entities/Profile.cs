@@ -1,5 +1,5 @@
 namespace Data;
-public class Profile : IAuditable
+public class Profile : IEntity
 {
     public string Id { set; get; }
     public string FirstName { set; get; }

@@ -1,0 +1,2 @@
+echo 'hi'
+dotnet ef migrations add Initial --project Data --startup-project QuackQuack

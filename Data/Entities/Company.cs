@@ -1,5 +1,5 @@
 namespace Data;
-public class Company : IAuditable
+public class Company : IEntity
 {
     public string Id { set; get; }
     public string Name { set; get; }
